@@ -1,0 +1,21 @@
+name: push-to-codecommit
+on: [push]
+jobs:
+  codecommit:
+    name: CodeCommit
+    runs-on: ubuntu-latest
+    env:
+      CODECOMMIT_URL: ${{ secrets.CODECOMMIT_URL }}
+      SSH_CONFIG: ${{ secrets.SSH_CONFIG }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Push to AWS CodeCommit
+        uses: sparktx-mark-welsh/codecommit-gha@main
+        with:
+          CODECOMMIT_URL: $CODECOMMIT_URL
+          SSH_CONFIG: $SSH_CONFIG
+          SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY

@@ -1,0 +1,33 @@
+name: "Push to AWS CodeCommit"
+description: "Use IAM + SSH to keep a GitHub repo in sync on CodeCommit."
+
+inputs:
+  AWS_ACCESS_KEY_ID:
+    description: "AWS IAM user key ID for CodeCommit service user."
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    description: "AWS IAM secret key for CodeCommit service user."
+    required: true
+  SSH_USER_ID:
+    description: "SSH key ID stored for the AWS IAM CodeCommit service user."
+    required: true
+  SSH_PRIVATE_KEY:
+    description: "SSH private key for the AWS IAM CodeCommit service user."
+    required: true
+  REPO_NAME:
+    description: "Name of the GitHub repository."
+    required: true
+  BRANCH_NAME:
+    description: "Name of the branch to push to CodeCommit."
+    required: true
+
+runs:
+  using: "Docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.AWS_ACCESS_KEY_ID }}
+    - ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+    - ${{ inputs.SSH_USER_ID }}
+    - ${{ inputs.SSH_PRIVATE_KEY }}
+    - ${{ inputs.REPO_NAME }}
+    - ${{ inputs.BRANCH_NAME }}
