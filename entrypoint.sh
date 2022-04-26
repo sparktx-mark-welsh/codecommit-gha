@@ -23,5 +23,7 @@ AWS_RESPONSE=$(aws codecommit get-repository --repository-name "$REPO_NAME" || \
     aws codecommit create-repository --repository-name "$REPO_NAME")
 CODECOMMIT_URL=$(jq -r '.repositoryMetadata.cloneUrlSsh' <<< $AWS_RESPONSE)
 
+echo "$CODECOMMIT_URL"
+
 git remote add codecommit "$CODECOMMIT_URL"
 git push codecommit $BRANCH_NAME
