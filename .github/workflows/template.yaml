@@ -18,3 +18,5 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REPO_NAME: ${{ github.event.repository.name }}
           BRANCH_NAME: ${{ github.ref_name }}
+          SVC_USERNAME: "svc.SparkDsApex"
+          SVC_EMAIL: "svc.SparkDsApex.p@sparktx.com"

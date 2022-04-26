@@ -20,6 +20,12 @@ inputs:
   BRANCH_NAME:
     description: "Name of the branch to push to CodeCommit."
     required: true
+  SVC_USERNAME:
+    description: "Username to be used by git on CodeCommit (only used in git log)"
+    required: true
+  SVC_EMAIL:
+    description: "Email to be used by git on CodeCommit (only used in git log)"
+    required: true
 
 runs:
   using: "Docker"
@@ -31,3 +37,5 @@ runs:
     - ${{ inputs.SSH_PRIVATE_KEY }}
     - ${{ inputs.REPO_NAME }}
     - ${{ inputs.BRANCH_NAME }}
+    - ${{ inputs.SVC_USERNAME }}
+    - ${{ inputs.SVC_EMAIL }}
