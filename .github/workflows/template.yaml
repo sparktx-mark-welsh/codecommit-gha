@@ -5,17 +5,23 @@ jobs:
     name: CodeCommit
     runs-on: ubuntu-latest
     env:
-      CODECOMMIT_URL: ${{ secrets.CODECOMMIT_URL }}
-      SSH_CONFIG: ${{ secrets.SSH_CONFIG }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      SSH_USER_ID: ${{ secrets.SSH_USER_ID }}
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      REPO_NAME: ${{ github.repository }}
+      BRANCH_NAME: ${{ github.ref }}
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Push to AWS CodeCommit
         uses: sparktx-mark-welsh/codecommit-gha@main
         with:
-          CODECOMMIT_URL: $CODECOMMIT_URL
-          SSH_CONFIG: $SSH_CONFIG
+          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+          SSH_USER_ID: $SSH_USER_ID
           SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+          REPO_NAME: $REPO_NAME
+          BRANCH_NAME: $BRANCH_NAME
