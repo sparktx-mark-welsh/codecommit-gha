@@ -29,6 +29,6 @@ git config --global user.email "$SVC_EMAIL"
 git config --global user.name "$SVC_USERNAME"
 git config --global --add safe.directory /github/workspace
 
-cd /github/workspace && \
+cd /github/workspace && ls * && \
     git remote add codecommit "$CODECOMMIT_URL" && \
     git push codecommit $BRANCH_NAME
