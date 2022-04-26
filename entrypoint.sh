@@ -25,12 +25,13 @@ aws --profile default configure set region "us-east-2"
 
 AWS_RESPONSE=$(aws codecommit get-repository --repository-name "$REPO_NAME" || \
     aws codecommit create-repository --repository-name "$REPO_NAME")
-CODECOMMIT_URL=$(jq -r '.repositoryMetadata.cloneUrlSsh' <<< $AWS_RESPONSE)
+CLONE_URL=$(jq -r '.repositoryMetadata.cloneUrlSsh' <<< $AWS_RESPONSE)
+CODECOMMIT_URL="ssh://${SSH_USER_ID}@${CLONE_URL:6}" # trim off the first 6 chars "ssh://", add user-id, add ssh:// back
 
 git config --global user.email "$SVC_EMAIL"
 git config --global user.name "$SVC_USERNAME"
 git config --global --add safe.directory /github/workspace
 
-cd /github/workspace && ls -a * && \
+cd /github/workspace && ls -Ra * && \
     git remote add codecommit "$CODECOMMIT_URL" && \
     git push codecommit $BRANCH_NAME
