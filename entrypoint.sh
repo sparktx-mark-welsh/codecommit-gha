@@ -11,25 +11,14 @@ BRANCH_NAME="$6"
 SVC_USERNAME="$7"
 SVC_EMAIL="$8"
 
-whoami
-echo ~
-
 mkdir -p /github/home/.ssh && cd /github/home/.ssh && echo "$SSH_PRIVATE_KEY" > id_rsa && chmod 600 id_rsa;
-#echo "Host git-codecommit.*.amazonaws.com
-#User $SSH_USER_ID
-#IdentityFile ~/.ssh/id_rsa
-#StrictHostKeyChecking no" > config && chmod 600 config
 
 echo "Host git-codecommit.*.amazonaws.com
 User $SSH_USER_ID
 IdentityFile /github/home/.ssh/id_rsa
 StrictHostKeyChecking no" > /etc/ssh/ssh_config.d/codecommit.conf
 
-#wc -l ~/.ssh/id_rsa && md5sum ~/.ssh/id_rsa
-
 ssh-keyscan -t rsa -H git-codecommit.us-east-2.amazonaws.com > known_hosts && chmod 600 known_hosts
-
-ls -ltrha ~/.ssh
 
 aws --profile default configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
 aws --profile default configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
@@ -46,4 +35,4 @@ git config --global --add safe.directory /github/workspace
 
 cd /github/workspace && \
     git remote add codecommit "$CODECOMMIT_URL" && \
-    GIT_SSH_COMMAND="ssh -vvv" git push codecommit $BRANCH_NAME
+    GIT_SSH_COMMAND="ssh -vv" git push codecommit $BRANCH_NAME
