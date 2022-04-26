@@ -17,6 +17,8 @@ User $SSH_USER_ID
 IdentityFile ~/.ssh/id_rsa
 StrictHostKeyChecking no" > config && chmod 600 config
 
+ssh-keyscan -t rsa -H git-codecommit.us-east-2.amazonaws.com > known_hosts && chmod 600 known_hosts
+
 aws --profile default configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
 aws --profile default configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
 aws --profile default configure set region "us-east-2"
@@ -30,6 +32,5 @@ git config --global user.name "$SVC_USERNAME"
 git config --global --add safe.directory /github/workspace
 
 cd /github/workspace && ls -a * && \
-    git remote add codecommit "$CODECOMMIT_URL" 
-#&& \
-#    git push codecommit $BRANCH_NAME
+    git remote add codecommit "$CODECOMMIT_URL" && \
+    git push codecommit $BRANCH_NAME
