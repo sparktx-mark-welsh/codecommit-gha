@@ -11,6 +11,9 @@ BRANCH_NAME="$6"
 SVC_USERNAME="$7"
 SVC_EMAIL="$8"
 
+whoami
+echo ~
+
 mkdir -p ~/.ssh && cd ~/.ssh && echo "$SSH_PRIVATE_KEY" > id_rsa && chmod 600 id_rsa;
 echo "Host git-codecommit.*.amazonaws.com
 User $SSH_USER_ID
