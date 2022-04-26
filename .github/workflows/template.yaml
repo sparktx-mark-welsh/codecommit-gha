@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Push to AWS CodeCommit
-        uses: sparktx-mark-welsh/codecommit-gha@main
+        uses: sparktx-mark-welsh/codecommit-gha@debug
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
