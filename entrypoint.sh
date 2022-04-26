@@ -25,5 +25,6 @@ CODECOMMIT_URL=$(jq -r '.repositoryMetadata.cloneUrlSsh' <<< $AWS_RESPONSE)
 
 echo "$CODECOMMIT_URL"
 
-git remote add codecommit "$CODECOMMIT_URL"
-git push codecommit $BRANCH_NAME
+cd /github/workspace && \
+    git remote add codecommit "$CODECOMMIT_URL" && \
+    git push codecommit $BRANCH_NAME
