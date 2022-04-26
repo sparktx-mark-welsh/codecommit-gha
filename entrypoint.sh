@@ -20,9 +20,16 @@ User $SSH_USER_ID
 IdentityFile ~/.ssh/id_rsa
 StrictHostKeyChecking no" > config && chmod 600 config
 
+echo "Host git-codecommit.*.amazonaws.com
+User $SSH_USER_ID
+IdentityFile ~/.ssh/id_rsa
+StrictHostKeyChecking no" > /etc/ssh/ssh_config.d/codecommit.conf
+
 wc -l ~/.ssh/id_rsa && md5sum ~/.ssh/id_rsa
 
 ssh-keyscan -t rsa -H git-codecommit.us-east-2.amazonaws.com > known_hosts && chmod 600 known_hosts
+
+ls -ltrha ~/.ssh
 
 aws --profile default configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
 aws --profile default configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
