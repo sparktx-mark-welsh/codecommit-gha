@@ -7,7 +7,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.2
 
       - name: Push to AWS CodeCommit
         uses: sparktx-mark-welsh/codecommit-gha@debug
