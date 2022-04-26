@@ -9,13 +9,6 @@ SSH_PRIVATE_KEY="$4"
 REPO_NAME="$5"
 BRANCH_NAME="$6"
 
-echo $AWS_ACCESS_KEY_ID
-echo $AWS_SECRET_ACCESS_KEY
-echo $SSH_USER_ID
-echo $SSH_PRIVATE_KEY
-echo $REPO_NAME
-echo $BRANCH_NAME
-
 mkdir -p ~/.ssh && cd ~/.ssh && echo "$SSH_PRIVATE_KEY" > id_rsa && chmod 600 id_rsa;
 echo "Host git-codecommit.*.amazonaws.com
 User $SSH_USER_ID
