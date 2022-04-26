@@ -34,5 +34,5 @@ git config --global --add safe.directory /github/workspace
 
 cd /github/workspace && ls -Ra && \
     git remote add codecommit "$CODECOMMIT_URL" && \
-    git remote -b && git log && \
+    git remote -v && git log && \
     git push codecommit $BRANCH_NAME
