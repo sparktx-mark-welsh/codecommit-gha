@@ -17,10 +17,12 @@ resource "aws_iam_user_policy" "codecommit_policy" {
   "Statement": [
     {
       "Action": [
+        "codecommit:GetRepository",
         "codecommit:CreateBranch",
         "codecommit:CreateRepository",
         "codecommit:CreateCommit",
-        "codecommit:GitPush"
+        "codecommit:GitPush",
+        "codecommit:GitPull"
       ],
       "Effect": "Allow",
       "Resource": "*"
