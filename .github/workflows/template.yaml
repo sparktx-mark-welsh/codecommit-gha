@@ -4,24 +4,21 @@ jobs:
   codecommit:
     name: CodeCommit
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      SSH_USER_ID: ${{ secrets.SSH_USER_ID }}
-      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      REPO_NAME: ${{ github.repository }}
-      BRANCH_NAME: ${{ github.ref }}
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0
 
       - name: Push to AWS CodeCommit
-        uses: sparktx-mark-welsh/codecommit-gha@main
+        uses: sparktx-mark-welsh/codecommit-gha@debug
         with:
-          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-          SSH_USER_ID: $SSH_USER_ID
-          SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
-          REPO_NAME: $REPO_NAME
-          BRANCH_NAME: $BRANCH_NAME
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SSH_USER_ID: ${{ secrets.SSH_USER_ID }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          BRANCH_NAME: ${{ github.ref_name }}
+          SVC_USERNAME: "svc.SparkDsApex"
+          SVC_EMAIL: "svc.SparkDsApex.p@sparktx.com"
