@@ -26,16 +26,13 @@ jobs:
             gha/codecommit/ssh_private_key
           parse-json: false
 
-      - name: Check outputs
-        run: echo "GHA_CODECOMMIT_SSH_KEY_ID is set to '$GHA_CODECOMMIT_SSH_KEY_ID'"
-
       - name: Push to AWS CodeCommit
         uses: sparktx-mark-welsh/codecommit-gha@main
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SSH_USER_ID: "${GHA_CODECOMMIT_SSH_KEY_ID}"
-          SSH_PRIVATE_KEY: "${GHA_CODECOMMIT_SSH_PRIVATE_KEY}"
+          SSH_USER_ID: '$GHA_CODECOMMIT_SSH_KEY_ID'
+          SSH_PRIVATE_KEY: '$GHA_CODECOMMIT_SSH_PRIVATE_KEY'
           REPO_NAME: ${{ github.event.repository.name }}
           BRANCH_NAME: ${{ github.ref_name }}
           SVC_USERNAME: "svc.SparkDsApex"
