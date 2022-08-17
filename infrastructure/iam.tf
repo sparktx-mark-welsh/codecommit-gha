@@ -33,6 +33,16 @@ resource "aws_iam_user_policy" "codecommit_policy" {
       ],
       "Effect": "Allow",
       "Resource": "*"
+    },
+    {
+      "Action": [
+        "secretsmanager:GetSecretValue"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:secretsmanager:us-east-2:125195589298:secret:gha/codecommit/ssh_private_key-oRAcKG",
+        "arn:aws:secretsmanager:us-east-2:125195589298:secret:gha/codecommit/ssh-key-id-JRFiMJ"
+      ]
     }
   ]
 }
