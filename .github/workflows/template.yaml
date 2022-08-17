@@ -29,8 +29,8 @@ jobs:
       - name: Push to AWS CodeCommit
         uses: sparktx-mark-welsh/codecommit-gha@main
         with:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.CODECOMMIT_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CODECOMMIT_AWS_SECRET_ACCESS_KEY }}
           SSH_USER_ID: ${{ env.GHA_CODECOMMIT_SSH_KEY_ID }}
           SSH_PRIVATE_KEY: ${{ env.GHA_CODECOMMIT_SSH_PRIVATE_KEY }}
           REPO_NAME: ${{ github.event.repository.name }}
