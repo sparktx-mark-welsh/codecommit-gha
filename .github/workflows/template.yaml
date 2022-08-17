@@ -26,6 +26,9 @@ jobs:
             gha/codecommit/ssh_private_key
           parse-json: false
 
+      - name: Check outputs
+        run: echo "GHA_CODECOMMIT_SSH_KEY_ID is set to '$GHA_CODECOMMIT_SSH_KEY_ID'"
+
       - name: Push to AWS CodeCommit
         uses: sparktx-mark-welsh/codecommit-gha@main
         with:
