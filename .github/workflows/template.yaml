@@ -11,13 +11,28 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Configure AWS credentials from org secrets
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.CODECOMMIT_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.CODECOMMIT_AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-east-2"
+
+      - name: Retrieve CodeCommit credentials from SM
+        uses: abhilash1in/aws-secrets-manager-action@v2.1.0
+        with:
+          secrets: |
+            gha/codecommit/ssh-key-id
+            gha/codecommit/ssh_private_key
+          parse-json: false
+
       - name: Push to AWS CodeCommit
         uses: sparktx-mark-welsh/codecommit-gha@main
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SSH_USER_ID: ${{ secrets.SSH_USER_ID }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_USER_ID: ${{ env.GHA_CODECOMMIT_SSH_KEY_ID }}
+          SSH_PRIVATE_KEY: ${{ env.GHA_CODECOMMIT_SSH_PRIVATE_KEY }}
           REPO_NAME: ${{ github.event.repository.name }}
           BRANCH_NAME: ${{ github.ref_name }}
           SVC_USERNAME: "svc.SparkDsApex"
