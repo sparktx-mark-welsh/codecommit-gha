@@ -13,9 +13,6 @@ SVC_EMAIL="$8"
 
 mkdir -p /github/home/.ssh && cd /github/home/.ssh && echo "$SSH_PRIVATE_KEY" > id_rsa && chmod 600 id_rsa;
 
-echo "$SSH_USER_ID"
-echo "$SSH_PRIVATE_KEY"
-
 echo "Host git-codecommit.*.amazonaws.com
 User $SSH_USER_ID
 IdentityFile /github/home/.ssh/id_rsa
